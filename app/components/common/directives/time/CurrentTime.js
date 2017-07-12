@@ -1,8 +1,7 @@
 app.directive('myCurrentTime', ['$interval', function($interval) {
   // return the directive link function. (compile function not needed)
   return function(scope, element, attrs) {
-    var // date format
-    stopTime; // so that we can cancel the time updates
+    var stopTime; // so that we can cancel the time updates
 
     // used to update the UI
     function updateTime() {

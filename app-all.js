@@ -1,6 +1,6 @@
 var app = angular.module("WcApp", ['ui.router', 'ui.calendar']);
 
-app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider.state('home', {
     url: '/',
     templateUrl: 'app/components/home/Home.html',
@@ -42,17 +42,25 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 });
 
+app.run(['$rootScope', '$state', '$stateParams',
+  function ($rootScope, $state, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+  }]);
+
 app.constant('constants', {
   api: {
     url: '/v1'
   }
 });
-function CalendarHomeCtrl($scope, $http,$compile, uiCalendarConfig, DateUtil) {
+function CalendarHomeCtrl($scope, $http, $compile, uiCalendarConfig, DateUtil) {
 
-  $scope.eventRender = function( event, element, view ) { 
-      element.attr({'tooltip': event.title,
-                   'tooltip-append-to-body': true});
-      $compile(element)($scope);
+  $scope.eventRender = function (event, element, view) {
+    element.attr({
+      'tooltip': event.title,
+      'tooltip-append-to-body': true
+    });
+    $compile(element)($scope);
   };
   /* configuration object */
   $scope.uiConfig = {
@@ -74,12 +82,12 @@ function CalendarHomeCtrl($scope, $http,$compile, uiCalendarConfig, DateUtil) {
       title: "Bahubali 2 official trailer",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-03-16')),
       url: "/cinema/Baahubali2",
-      className:"fa fa-music color-VIDEO"
+      className: "fa fa-music color-VIDEO"
     }, {
       title: "Om Namo venkatesaya",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-02-10')),
       url: "/post/tikka-teaser-1",
-      className:"fa fa-film color-mediumseagreen" 
+      className: "fa fa-film color-mediumseagreen"
     }, {
       title: "Singam 3",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-02-09')),
@@ -92,33 +100,33 @@ function CalendarHomeCtrl($scope, $http,$compile, uiCalendarConfig, DateUtil) {
       title: "Raarandoi Veduka Choodham",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-18')),
       url: "/cinema/",
-      className:"fa fa-music color-MUSIC"
+      className: "fa fa-music color-MUSIC"
     }, {
       title: "Katamarayudu teaser",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-02-04')),
       url: "https://www.youtube.com/watch?v=XpAaOER_6iY",
-      className:"fa fa-video-camera color-NEWS"
+      className: "fa fa-video-camera color-NEWS"
     },
     {
       title: "Sample Video",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-18')),
       url: "/cinema/",
-      className:"fa fa-video-camera color-VIDEO"
+      className: "fa fa-video-camera color-VIDEO"
     }, {
       title: "Vijay Devarakonda",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-08')),
       url: "/celebrity",
-      className:"fa fa-birthday-cake color-BIRTHDAY"
-    },{
+      className: "fa fa-birthday-cake color-BIRTHDAY"
+    }, {
       title: "Sample",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-18')),
       url: "/celebrity",
-      className:"fa fa-birthday-cake color-BIRTHDAY"
+      className: "fa fa-birthday-cake color-BIRTHDAY"
     }, {
       title: "Sample cinema",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-18')),
       url: "/post/tikka-teaser-1",
-      className:"fa fa-film color-mediumseagreen" 
+      className: "fa fa-film color-mediumseagreen"
     }]
   };
 
@@ -126,8 +134,8 @@ function CalendarHomeCtrl($scope, $http,$compile, uiCalendarConfig, DateUtil) {
   $scope.eventSources = [$scope.events];
 }
 
-app.controller('CalendarHomeCtrl', ['$scope', '$http','$compile','uiCalendarConfig',
-    'DateUtil', CalendarHomeCtrl]);
+app.controller('CalendarHomeCtrl', ['$scope', '$http', '$compile', 'uiCalendarConfig',
+  'DateUtil', CalendarHomeCtrl]);
 
 app.controller('CelebrityCtrl',['$scope',CelebrityCtrl]);
 
@@ -146,23 +154,28 @@ function CinemaCtrl($scope, $http, $stateParams, constants) {
 	$scope.cinemaName = $stateParams.cinemaName;
 	$scope.isLoading = true;
 	$scope.found = true;
-	$scope.setCurrentSong = function(val){
-	  $scope.currentSong = val
+	$scope.setCurrentSong = function (val) {
+		$scope.currentSong = val
 	};
 	var GET = $http.get(constants.api.url + '/cinema/' + $stateParams.cinemaName);
-	GET.success(function(response) {
+	GET.success(function (response) {
 		$scope.cinema = response || null;
-		$scope.currentSong = $scope.cinema.songs.list ? $scope.cinema.songs.list[0].youtubeUrl:undefined;
+		$scope.currentSong = $scope.cinema.songs && $scope.cinema.songs.list.length ? $scope.cinema.songs.list[0].youtubeUrl : undefined;
+		/*		$scope.director = $scope.cinema.casting.crew.find(function(cel){
+					 return cel.type === 'Director'
+				});
+				$scope.producer = $scope.cinema.casting.crew.find(function(cel){
+					return cel.type === 'Producer'
+			 });*/
 		$scope.isLoading = false;
 	});
-	GET.error(function() {
+	GET.error(function () {
 		$scope.cinema = null;
 		$scope.isLoading = false;
 	});
-	
-}
 
-app.controller('CinemaCtrl', [ '$scope', '$http', '$stateParams', 'constants',CinemaCtrl ]);
+}
+app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'constants', CinemaCtrl]);
 
 
 function CinemaHomeCtrl($scope, $http,$state) {
@@ -178,7 +191,7 @@ function BodyDirective() {
     templateUrl: "app/components/common/body/Body.html"
   };
 }
-app.directive('wcbody', [BodyDirective]);
+app.directive('home', [BodyDirective]);
 function And($sce) {
   return {
     restrict: 'E',
@@ -186,63 +199,65 @@ function And($sce) {
       list: '='
     },
     replace: true,
-    link: function(scope, elm) {
-      scope.$watch('list', function(newList) {
+    link: function (scope, elm) {
+      scope.$watch('list', function (newList) {
         if (newList) {
-          if(newList.length>=2){
+          if (newList.length >= 2) {
             var copy = angular.copy(newList);
             var lastElm = copy.pop();
             elm.text(copy.join().concat(" and ").concat(lastElm));
           }
-          else{
+          else {
             elm.text(newList.join());
           }
         }
       });
+    }
   }
-}
 }
 
 app.directive('and', ['$sce', And]);
-app.directive("owlCarousel", function() {
-    return {
-      restrict: 'E',
-      transclude: false,
-      link: function(scope) {
-        scope.initCarousel = function(element) {
-          var defaultOptions = {autoplay:true,rewind:true,dots:true,nav:true,responsive: {
+app.directive("owlCarousel", function () {
+  return {
+    restrict: 'E',
+    transclude: false,
+    link: function (scope) {
+      scope.initCarousel = function (element) {
+        var defaultOptions = {
+          autoplay: true, rewind: true, dots: true, nav: true, responsive: {
             0: {
               items: 2
             },
             300: {
               items: 3
             },
-            400:{
+            400: {
               items: 4
             },
             1000: {
               items: 10
             }
-          }};
-          var customOptions = scope.$eval($(element).attr('data-options'));
-          for ( var key in customOptions) {
-            defaultOptions[key] = customOptions[key];
           }
-          $(element).owlCarousel(defaultOptions);
         };
-      }
-    };
-  }).directive('owlCarouselItem', [function() {
-    return {
-      restrict: 'E',
-      transclude: false,
-      link: function(scope, element) {
-        if (scope.$last) {
-          scope.initCarousel(element.parent());
+        var customOptions = scope.$eval($(element).attr('data-options'));
+        for (var key in customOptions) {
+          defaultOptions[key] = customOptions[key];
         }
+        $(element).owlCarousel(defaultOptions);
+      };
+    }
+  };
+}).directive('owlCarouselItem', [function () {
+  return {
+    restrict: 'E',
+    transclude: false,
+    link: function (scope, element) {
+      if (scope.$last) {
+        scope.initCarousel(element.parent());
       }
-    };
-  }]);
+    }
+  };
+}]);
 
 app.directive('spinner', [function() {
     return {
@@ -250,7 +265,7 @@ app.directive('spinner', [function() {
       scope: {
         show: '='
       },
-      templateUrl:'app/components/common/directives/spinner/spinner.html',
+      templateUrl:'app/components/common/directives/spinner/Spinner.html',
       link: function(scope, element) {
         $(element).modal('show');
         $("#myModal").modal('show');
@@ -266,8 +281,7 @@ app.directive('spinner', [function() {
 app.directive('myCurrentTime', ['$interval', function($interval) {
   // return the directive link function. (compile function not needed)
   return function(scope, element, attrs) {
-    var // date format
-    stopTime; // so that we can cancel the time updates
+    var stopTime; // so that we can cancel the time updates
 
     // used to update the UI
     function updateTime() {
@@ -326,16 +340,16 @@ function TimeDiff($sce) {
     },
     templateUrl: '',
     replace: true,
-    link: function(scope, elm) {
-      scope.$watch('date', function(newVal) {
+    link: function (scope, elm) {
+      scope.$watch('date', function (newVal) {
         if (newVal) {
           var startDate = new Date();
           var endDate = new Date(newVal);
           var timeStart = startDate.getTime();
           var timeEnd = endDate.getTime();
           var diffMs = (timeStart - timeEnd);
-          var diffYears = Math.abs(Math.round((diffMs/(60 * 60 * 24))/365.25));
-          var diffMonths = monthDiff(endDate,startDate)
+          var diffYears = Math.abs(Math.round((diffMs / (60 * 60 * 24)) / 365.25));
+          var diffMonths = monthDiff(endDate, startDate)
           var diffDays = Math.floor(diffMs / 86400000); // days
           var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
           var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
@@ -383,13 +397,14 @@ app.directive('myYoutube', ['$sce', YoutubeDirective]);
 function YoutubeDirective($sce) {
   return {
     restrict: 'E',
+    replace: true,
     scope: {
       code: '='
     },
     replace: true,
     templateUrl: 'app/components/common/directives/youtube/Youtube.html',
-    link: function(scope) {
-      scope.$watch('code', function(newVal) {
+    link: function (scope) {
+      scope.$watch('code', function (newVal) {
         if (newVal) {
           scope.url = $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + newVal);
         }
@@ -398,19 +413,19 @@ function YoutubeDirective($sce) {
   };
 }
 
-app.service('RestAPIFactory', [ '$http', function($http) {
+app.service('RestAPIFactory', ['$http', function ($http) {
 
-	var get = function(url) {
+	var get = function (url) {
 		var GET = $http({
-			method : 'GET',
-			url : url
+			method: 'GET',
+			url: url
 		});
 		return GET;
 	};
 	return {
-		get : get
+		get: get
 	};
-} ]);
+}]);
 function HeaderCtrl($scope,$rootScope,$location,$state,$stateParams) 
 { 
    
@@ -447,7 +462,7 @@ function HomeCtrl($scope,$rootScope,RestAPI, $window, constants, $interval) {
   me.videos = [];
   me.posts = [];
   me.isLoading = true;
-  me.loaderTotalCount = 1;
+  me.loaderTotalCount = 3;
   me.loaderCount = 0;
   me.language = $rootScope.language;
 
@@ -465,13 +480,22 @@ function HomeCtrl($scope,$rootScope,RestAPI, $window, constants, $interval) {
     me.posts = [];
   });
   
-  var GET = RestAPI.get(constants.api.url + '/cinemas');
+  var GET = RestAPI.get(constants.api.url + '/upcomingCinemas');
   GET.success(function(response) {
-    me.upcomingCinemas = response.upcomingCinemas ? response.upcomingCinemas : [];
+    me.upcomingCinemas = response.data ? response.data : [];
     me.showOrHideLoader();
   });
   GET.error(function() {
     me.upcomingCinemas = [];
+  });
+  
+  var GET = RestAPI.get(constants.api.url + '/recentCinemas');
+  GET.success(function(response) {
+    me.recentCinemas = response.data ? response.data : [];
+    me.showOrHideLoader();
+  });
+  GET.error(function() {
+    me.recentCinemas = [];
   });
 
   me.showPost = function(post) {

@@ -1,205 +1,404 @@
-<spinner show="!isLoading"></spinner>
-<!-- Master Slider -->
-    <div class="container content no-padding-bottom">
-        <div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
-            <div class="ms-slide blog-slider">
-                <img src="assets/plugins/master-slider/masterslider/style/blank.gif" data-src="assets/img/blog/img9.jpg" alt="lorem ipsum dolor sit"/>
-                <span class="blog-slider-badge">Fashion</span>
-                <div class="ms-info"></div>
-                <div class="blog-slider-title">
-                    <span class="blog-slider-posted">Mar 6, 2015</span>
-                    <h2><a href="#">Is this the end for fashion police?</a></h2>
-                </div>
-                <div class="ms-thumb">
-                    <h3>Fashion Week</h3>
-                    <p>Lorem ipsum dolor sit ametonse ctetuer elit</p>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-md-6">
+            <span class="badge  bg-color-INCINEMAS">Now Showing</span>
+            <owl-carousel class="owl-carousel carousel owl-theme" data-options="{ items:10,dots: false, nav: false,responsive:{
+                            0:{
+                                items:3
+                            },
+                            500:{
+                              items:5
+                            }
+                       }
+                     }">
+                <owl-carousel-item ng-repeat="cinema in recentCinemas">
+                    <div class="card padding-v-5">
+                        <div class="easy-block-v1">
+                            <img class="img-responsive img-max-height-150" src="{{cinema.general.posterUrl}}" alt="">
+                            <div class="easy-block-v1-badge rgba-red" ng-show="{{cinema.general.rating}}">{{cinema.general.rating}}</div>
+                        </div>
+                        <div class="block-grid-v2-info rounded-bottom">
+                            <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></h4>
+                            <ul class="list-inline star-vote">
+                                <li ng-repeat="number in [1,2,3,4,5]">
+                                    <i ng-class="{'fa fa-star': (number-cinema.general.rating)<=0,'fa fa-star-o': (number-cinema.general.rating)>=1,'fa fa-star-half-o': ((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)}"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </owl-carousel-item>
+            </owl-carousel>
+        </div>
+        <div class="col-md-6">
+            <div class="carousel slide carousel-v1" id="myCarousel-1">
+						<div class="carousel-inner" ng-repeat="post in videos">
+							<div ng-class="{active: $index == 4}" class="item">
+								<img class="img-max-height-250"src="https://i.ytimg.com/vi/{{post.media.video.youtube[0]}}/maxresdefault.jpg">
+								<div class="carousel-caption">
+									<p>{{post.msg.local.ttl}}</p>
+								</div>
+							</div>
+						</div>
 
-            <div class="ms-slide blog-slider">
-                <img src="assets/plugins/master-slider/masterslider/style/blank.gif" data-src="assets/img/blog/img52.jpg" alt="lorem ipsum dolor sit"/>
-                <span class="blog-slider-badge">Hi-Tech</span>
-                <div class="ms-info"></div>
-                <div class="blog-slider-title">
-                    <span class="blog-slider-posted">Mar 6, 2015</span>
-                    <h2><a href="#">Learning as you're earning: The alternative to a degree</a></h2>
-                </div>
-                <div class="ms-thumb">
-                    <h3>LA Hi-Tech Showcase</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer elit</p>
-                </div>
-            </div>
-
-            <div class="ms-slide blog-slider">
-                <img src="assets/plugins/master-slider/masterslider/style/blank.gif" data-src="assets/img/blog/img5.jpg" alt="lorem ipsum dolor sit"/>
-                <span class="blog-slider-badge">Sport</span>
-                <div class="ms-info"></div>
-                <div class="blog-slider-title">
-                    <span class="blog-slider-posted">Mar 6, 2015</span>
-                    <h2><a href="#">Brady handed his place in history</a></h2>
-                </div>
-                <div class="ms-thumb">
-                    <h3>World Sport</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer elit</p>
-                </div>
-            </div>
-
-            <div class="ms-slide blog-slider">
-                <img src="assets/plugins/master-slider/masterslider/style/blank.gif" data-src="assets/img/blog/img16.jpg" alt="lorem ipsum dolor sit"/>
-                <span class="blog-slider-badge">Fashion</span>
-                <div class="ms-info"></div>
-                <div class="blog-slider-title">
-                    <span class="blog-slider-posted">Mar 6, 2015</span>
-                    <h2><a href="#">Nadège Vanhee-Cybulski makes Hermès debut</a></h2>
-                </div>
-                <div class="ms-thumb">
-                    <h3>Welcome to New York</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer elit</p>
-                </div>
-            </div>
-
-            <div class="ms-slide blog-slider">
-                <img src="assets/plugins/master-slider/masterslider/style/blank.gif" data-src="assets/img/blog/img35.jpg" alt="lorem ipsum dolor sit"/>
-                <a href="http://player.vimeo.com/video/53914149" data-type="video"> vimeo video </a>
-                <span class="blog-slider-badge">Travel</span>
-                <div class="ms-info"></div>
-                <div class="blog-slider-title">
-                    <span class="blog-slider-posted">Mar 6, 2015</span>
-                    <h2><a href="#">Our favourite images of the week</a></h2>
-                </div>
-                <div class="ms-thumb">
-                    <h3>Travel with Us</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer elit</p>
-                </div>
-            </div>
-
-            <div class="ms-slide blog-slider">
-                <img src="assets/plugins/master-slider/masterslider/style/blank.gif" data-src="assets/img/blog/img41.jpg" alt="lorem ipsum dolor sit"/>
-                <span class="blog-slider-badge">Travel</span>
-                <div class="ms-info"></div>
-                <div class="blog-slider-title">
-                    <span class="blog-slider-posted">Mar 6, 2015</span>
-                    <h2><a href="#">Must be visited places in the world</a></h2>
-                </div>
-                <div class="ms-thumb">
-                    <h3>Hot Deals to UK</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer elit</p>
-                </div>
-            </div>
-
-            <div class="ms-slide blog-slider">
-                <img src="assets/plugins/master-slider/masterslider/style/blank.gif" data-src="assets/img/blog/img48.jpg" alt="lorem ipsum dolor sit"/>
-                <span class="blog-slider-badge">Health</span>
-                <div class="ms-info"></div>
-                <div class="blog-slider-title">
-                    <span class="blog-slider-posted">Mar 6, 2015</span>
-                    <h2><a href="#">5 Facts about Coca-Cola</a></h2>
-                </div>
-                <div class="ms-thumb">
-                    <h3>Health and Medicine</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer elit</p>
-                </div>
-            </div>
-
-            <div class="ms-slide blog-slider">
-                <img src="assets/plugins/master-slider/masterslider/style/blank.gif" data-src="assets/img/blog/img53.jpg" alt="lorem ipsum dolor sit"/>
-                <span class="blog-slider-badge">Community</span>
-                <div class="ms-info"></div>
-                <div class="blog-slider-title">
-                    <span class="blog-slider-posted">Mar 6, 2015</span>
-                    <h2><a href="#">Minimalism gives way to embroidery and crystals</a></h2>
-                </div>
-                <div class="ms-thumb">
-                    <h3>Community Meeting</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer elit</p>
-                </div>
-            </div>
+						<div class="carousel-arrow">
+							<a data-slide="prev" href="#myCarousel-1" class="left carousel-control">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a data-slide="next" href="#myCarousel-1" class="right carousel-control">
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</div>
+					</div>
         </div>
     </div>
-    <!-- End Master Slider -->
-<div class="container" ng-if="!isLoading">
-	<div class="row">
-		<div class="col-md-3">
-			<span class="badge  bg-color-TEASER">Trending Videos</span>
-			<div class="" ng-repeat="post in videos">
-				<div class="media-body">
-					<h4 class="media-heading">
-						<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{
-							post.msg.local.ttl}}</a>
-					</h4>
-				</div>
-			</div>
-			<small><a href="">more videos</a></small>
-		</div>
-		<div class="col-md-3">
-			<span class="badge  bg-color-NEWS">Trending News</span>
-			<div class="" ng-repeat="post in videos">
-				<div class="media-body">
-					<h4 class="media-heading">
-						<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{
-							post.msg.local.ttl}}</a>
-					</h4>
-				</div>
-			</div>
-			<small><a href="">more news</a></small>
-		</div>
-		<div class="col-md-3">
-			<span class="badge  bg-color-MUSIC">Trending Audio</span>
-		</div>
-		<div class="col-md-3">
-			<span class="badge badge-NEXT_ANTY">Next Anty ?</span>
-			<div ng-repeat="cinema in upcomingCinemas">
-				<div class="media-body">
-					<h4 class="media-heading">
-						<a ui-sref="cinema({cinemaName:cinema.cinemaId})"
-							href="#/cinema/{{cinema.cinemaId}}">{{ cinema.name}}</a>
-					</h4>
-				</div>
-			</div>
-			<div class="media-body"></div>
-		</div>
-	</div>
-</div>
-<div class="container" ng-if="!isLoading">
-	<span class="badge  bg-color-INCINEMAS">Reviews</span>
-</div>
-<div class="container" ng-if="!isLoading">
-	<span class="badge  bg-color-darkorange">Coming Soon</span>
-	<owl-carousel class="owl-carousel carousel owl-theme card-group"
-		data-options="{ items:10}"> <owl-carousel-item
-		ng-repeat="cinema in upcomingCinemas">
-	<div class="card card-group">
-		<a ui-sref="cinema({cinemaName:cinema.cinemaId})"
-			href="#/cinema/{{cinema.cinemaId}}"> <img
-			class="card-img-top img-120" src="{{cinema.general.posterUrl}}"
-			alt="Card image cap">
-		</a>
-		<div class="card-block">
-			<h5 class="card-title">{{cinema.name}}</h5>
-		</div>
-	</div>
-	</owl-carousel-item> </owl-carousel>
 </div>
 
-<div class="container content-sm">
-	<div class="row">
-		<div class="col-md-3 col-xs-6 md-margin-bottom-50">
-			<i class="fa fa-film" aria-hidden="true"></i> <span class="counter">265</span>
-			<h4>Cinemas</h4>
-		</div>
-		<div class="col-md-3 col-xs-6 md-margin-bottom-50">
-			<i class="icon-user"></i> <span class="counter">5957</span>
-			<h4>Celebrities</h4>
-		</div>
-		<div class="col-md-3 col-xs-6">
-			<i class="icon-emoticon-smile"></i> <span class="counter">3495</span>
-			<h4>Posts</h4>
-		</div>
-		<div class="col-md-3 col-xs-6">
-			<i class="icon-bulb"></i> <span class="counter">576</span>
-			<h4>New Ideas</h4>
-		</div>
-	</div>
-	<!--/end row-->
+<!--=== Container Part ===-->
+<div class="container">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <!-- Tab v4 -->
+            <div class="tab-v1">
+                <!-- Tab Heading -->
+                <div class="tab-heading">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="home active">
+                            <a href="#tab-v4-a1" role="tab" data-toggle="tab">Trending</a>
+                        </li>
+                        <li>
+                            <a href="#tab-v4-a2" role="tab" data-toggle="tab">Trailers</a>
+                        </li>
+                        <li>
+                            <a href="#tab-v4-a3" role="tab" data-toggle="tab">Teaser</a>
+                        </li>
+                        <li>
+                            <a href="#tab-v4-a1" role="tab" data-toggle="tab">Short Films</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Latest News -->
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab-v4-a1">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb-v2" ng-repeat="post in videos.slice(0,5)">
+                                    <div class="blog-thumb-grad margin-bottom-5">
+                                        <img src="https://i.ytimg.com/vi/{{post.media.video.youtube[0]}}/mqdefault.jpg" alt="">
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.msg.local.ttl}}</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb-v2" ng-repeat="post in videos.slice(5,10)">
+                                    <div class="blog-thumb-grad margin-bottom-5">
+                                        <img src="https://i.ytimg.com/vi/{{post.media.video.youtube[0]}}/mqdefault.jpg" alt="">
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.msg.local.ttl}}</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4">
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb-v2" ng-repeat="post in videos.slice(10,15)">
+                                    <div class="blog-thumb-grad margin-bottom-5">
+                                        <img src="https://i.ytimg.com/vi/{{post.media.video.youtube[0]}}/mqdefault.jpg" alt="">
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.msg.local.ttl}}</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/end row-->
+                    </div>
+                    <div class="tab-pane fade" id="tab-v4-a2">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <!-- Blog Grid -->
+                                <div class="blog-grid sm-margin-bottom-40">
+                                    <img class="img-responsive" src="assets/img/blog/img9.jpg" alt="">
+                                    <h3><a href="blog_single.html">Is this the end for fashion police?</a></h3>
+                                    <ul class="blog-grid-info">
+                                        <li>Susie Lau</li>
+                                        <li>Mar 7, 2015</li>
+                                        <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                    </ul>
+                                    <p>Mauris iaculis nisl eu ipsum dapibus pretium. Morbi quis justo non turpis cursus pharetra.
+                                        Cras ac ligula sem. Nulla facilisi. Curabitur vulputate cursus ornare. Sed enim sapien,
+                                        sodales at augue vel, molestie commodo velit.</p>
+                                    <a class="r-more" href="blog_single.html">Read More</a>
+                                </div>
+                                <!-- End Blog Grid -->
+                            </div>
+
+                            <div class="col-sm-5">
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb margin-bottom-20">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img16.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-video-camera"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">Nadï¿½ge Vanhee-Cybulski makes Hermï¿½s debut</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb margin-bottom-20">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img15.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-photo"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">Minimalism gives way to embroidery and crystals as Paris shows draw to a close</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb margin-bottom-20">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img17.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-photo"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">In bed with Cara Delevingne as she talks bags, boys and bunnies</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb margin-bottom-20">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img24.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-photo"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">Malaika Firth tells all: 'I met my boyfriend through Twitter'</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img18.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-volume-up"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">Instagram style tips of the week</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+                            </div>
+                        </div>
+                        <!--/end row-->
+                    </div>
+                    <div class="tab-pane fade" id="tab-v4-a3">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <!-- Blog Grid -->
+                                <div class="blog-grid sm-margin-bottom-40">
+                                    <img class="img-responsive" src="assets/img/blog/img13.jpg" alt="">
+                                    <h3><a href="blog_single.html">Education news, opinion and guides</a></h3>
+                                    <ul class="blog-grid-info">
+                                        <li>Richard Garner</li>
+                                        <li>Mar 9, 2015</li>
+                                        <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                    </ul>
+                                    <p>Nulla gravida sit amet odio vel posuere. Proin maximus est diam, sed iaculis arcu ultrices
+                                        sed. Quisque nisi diam, sodales sit amet diam ut, bibendum interdum metus. Pellentesque
+                                        urna magna, sollicitudin vel semper quis, iaculis sed neque.</p>
+                                    <a class="r-more" href="blog_single.html">Read More</a>
+                                </div>
+                                <!-- End Blog Grid -->
+                            </div>
+
+                            <div class="col-sm-5">
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb margin-bottom-20">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img1.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-photo"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">Learning as you're earning: The alternative to a degree</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb margin-bottom-20">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img11.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-video-camera"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">Universities found to offer ï¿½unlawfulï¿½ terms to students</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb margin-bottom-20">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img2.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-photo"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">25 Unconventional Business Books that You Won't See on Most Bookshelves (But Should)</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb margin-bottom-20">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img19.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-photo"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">Learn something new every day</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+
+                                <!-- Blog Thumb -->
+                                <div class="blog-thumb">
+                                    <div class="blog-thumb-hover">
+                                        <img src="assets/img/blog/img8.jpg" alt="">
+                                        <a class="hover-grad" href="blog_single.html"><i class="fa fa-volume-up"></i></a>
+                                    </div>
+                                    <div class="blog-thumb-desc">
+                                        <h3><a href="blog_single.html">Student finance: Crunch the numbers cleverly</a></h3>
+                                        <ul class="blog-thumb-info">
+                                            <li>Mar 6, 2015</li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> 0</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Blog Thumb -->
+                            </div>
+                        </div>
+                        <!--/end row-->
+                    </div>
+                </div>
+                <!-- End Tab Content -->
+            </div>
+            <!-- End Tab v4 -->
+        </div>
+        <!-- End Main Content -->
+
+        <!-- Right Sidebar -->
+        <div class="col-md-3">
+
+            <!-- End Blog Thumb v2 -->
+            <!-- Social Shares -->
+            <div class="margin-bottom-10">
+                <h2 class="title-v4">Social</h2>
+                <ul class="blog-social-shares">
+                    <li>
+                        <i class="rounded-x fb fa fa-facebook"></i>
+                        <a class="rounded-3x" href="#">Like</a>
+                        <span class="counter">31,702</span>
+                    </li>
+                    <li>
+                        <i class="rounded-x tw fa fa-twitter"></i>
+                        <a class="rounded-3x" href="#">Follow Us</a>
+                        <span class="counter">164,290</span>
+                    </li>
+                    <li>
+                        <i class="rounded-x gp fa fa-google-plus"></i>
+                        <a class="rounded-3x" href="#">Add to circle</a>
+                        <span class="counter">5,425,764</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Social Shares -->
+        </div>
+        <!-- End Right Sidebar -->
+    </div>
 </div>
-<!--/end container-->
+<!--=== End Container Part ===-->
+
+<div class="container">
+    <span class="badge  bg-color-darkorange">Coming Soon</span>
+    <owl-carousel class="owl-carousel carousel owl-theme" data-options="{ items:10,responsive:{
+                                        0:{
+                                            items:3
+                                        },
+                                        500:{
+                                            items:10
+                                        }
+                                }
+                                }">
+        <owl-carousel-item ng-repeat="cinema in upcomingCinemas">
+            <div class="card padding-v-5">
+                <div class="easy-block-v1">
+                    <img class="img-responsive img-max-height-250" src="{{cinema.general.posterUrl}}" alt="">
+                    <div class="easy-block-v1-badge rgba-red">{{cinema.general.rating}}</div>
+                </div>
+                <div class="block-grid-v2-info rounded-bottom">
+                    <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></h4>
+                </div>
+            </div>
+        </owl-carousel-item>
+    </owl-carousel>
+</div>

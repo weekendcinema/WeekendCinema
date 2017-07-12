@@ -1,6 +1,6 @@
 var app = angular.module("WcApp", ['ui.router', 'ui.calendar']);
 
-app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider.state('home', {
     url: '/',
     templateUrl: 'app/components/home/Home.html',
@@ -41,6 +41,12 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
 });
+
+app.run(['$rootScope', '$state', '$stateParams',
+  function ($rootScope, $state, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+  }]);
 
 app.constant('constants', {
   api: {

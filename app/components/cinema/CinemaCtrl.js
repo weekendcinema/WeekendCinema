@@ -2,21 +2,26 @@ function CinemaCtrl($scope, $http, $stateParams, constants) {
 	$scope.cinemaName = $stateParams.cinemaName;
 	$scope.isLoading = true;
 	$scope.found = true;
-	$scope.setCurrentSong = function(val){
-	  $scope.currentSong = val
+	$scope.setCurrentSong = function (val) {
+		$scope.currentSong = val
 	};
 	var GET = $http.get(constants.api.url + '/cinema/' + $stateParams.cinemaName);
-	GET.success(function(response) {
+	GET.success(function (response) {
 		$scope.cinema = response || null;
-		$scope.currentSong = $scope.cinema.songs.list ? $scope.cinema.songs.list[0].youtubeUrl:undefined;
+		$scope.currentSong = $scope.cinema.songs && $scope.cinema.songs.list.length ? $scope.cinema.songs.list[0].youtubeUrl : undefined;
+		/*		$scope.director = $scope.cinema.casting.crew.find(function(cel){
+					 return cel.type === 'Director'
+				});
+				$scope.producer = $scope.cinema.casting.crew.find(function(cel){
+					return cel.type === 'Producer'
+			 });*/
 		$scope.isLoading = false;
 	});
-	GET.error(function() {
+	GET.error(function () {
 		$scope.cinema = null;
 		$scope.isLoading = false;
 	});
-	
-}
 
-app.controller('CinemaCtrl', [ '$scope', '$http', '$stateParams', 'constants',CinemaCtrl ]);
+}
+app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'constants', CinemaCtrl]);
 

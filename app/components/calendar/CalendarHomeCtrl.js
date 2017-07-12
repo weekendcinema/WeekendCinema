@@ -1,9 +1,11 @@
-function CalendarHomeCtrl($scope, $http,$compile, uiCalendarConfig, DateUtil) {
+function CalendarHomeCtrl($scope, $http, $compile, uiCalendarConfig, DateUtil) {
 
-  $scope.eventRender = function( event, element, view ) { 
-      element.attr({'tooltip': event.title,
-                   'tooltip-append-to-body': true});
-      $compile(element)($scope);
+  $scope.eventRender = function (event, element, view) {
+    element.attr({
+      'tooltip': event.title,
+      'tooltip-append-to-body': true
+    });
+    $compile(element)($scope);
   };
   /* configuration object */
   $scope.uiConfig = {
@@ -25,12 +27,12 @@ function CalendarHomeCtrl($scope, $http,$compile, uiCalendarConfig, DateUtil) {
       title: "Bahubali 2 official trailer",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-03-16')),
       url: "/cinema/Baahubali2",
-      className:"fa fa-music color-VIDEO"
+      className: "fa fa-music color-VIDEO"
     }, {
       title: "Om Namo venkatesaya",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-02-10')),
       url: "/post/tikka-teaser-1",
-      className:"fa fa-film color-mediumseagreen" 
+      className: "fa fa-film color-mediumseagreen"
     }, {
       title: "Singam 3",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-02-09')),
@@ -43,33 +45,33 @@ function CalendarHomeCtrl($scope, $http,$compile, uiCalendarConfig, DateUtil) {
       title: "Raarandoi Veduka Choodham",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-18')),
       url: "/cinema/",
-      className:"fa fa-music color-MUSIC"
+      className: "fa fa-music color-MUSIC"
     }, {
       title: "Katamarayudu teaser",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-02-04')),
       url: "https://www.youtube.com/watch?v=XpAaOER_6iY",
-      className:"fa fa-video-camera color-NEWS"
+      className: "fa fa-video-camera color-NEWS"
     },
     {
       title: "Sample Video",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-18')),
       url: "/cinema/",
-      className:"fa fa-video-camera color-VIDEO"
+      className: "fa fa-video-camera color-VIDEO"
     }, {
       title: "Vijay Devarakonda",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-08')),
       url: "/celebrity",
-      className:"fa fa-birthday-cake color-BIRTHDAY"
-    },{
+      className: "fa fa-birthday-cake color-BIRTHDAY"
+    }, {
       title: "Sample",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-18')),
       url: "/celebrity",
-      className:"fa fa-birthday-cake color-BIRTHDAY"
+      className: "fa fa-birthday-cake color-BIRTHDAY"
     }, {
       title: "Sample cinema",
       start: DateUtil.toYYYY_MM_DD(new Date('2017-05-18')),
       url: "/post/tikka-teaser-1",
-      className:"fa fa-film color-mediumseagreen" 
+      className: "fa fa-film color-mediumseagreen"
     }]
   };
 
@@ -77,5 +79,5 @@ function CalendarHomeCtrl($scope, $http,$compile, uiCalendarConfig, DateUtil) {
   $scope.eventSources = [$scope.events];
 }
 
-app.controller('CalendarHomeCtrl', ['$scope', '$http','$compile','uiCalendarConfig',
-    'DateUtil', CalendarHomeCtrl]);
+app.controller('CalendarHomeCtrl', ['$scope', '$http', '$compile', 'uiCalendarConfig',
+  'DateUtil', CalendarHomeCtrl]);

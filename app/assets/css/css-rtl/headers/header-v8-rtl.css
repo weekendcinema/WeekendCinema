@@ -28,10 +28,10 @@
 
 /* Topbar List */
 .topbar-list {
-	padding-left: 0;
+	padding-right: 0;
 	list-style: none;
 	margin-bottom: 0;
-	float: left;
+	float: right;
 }
 .topbar-list > li {
 	color: #eee;
@@ -44,7 +44,7 @@
 }
 .topbar-list > li:before {
 	top: 11px;
-	left: -3px;
+	right: -3px;
 	width: 1px;
 	height: 9px;
 	content: ' ';
@@ -52,7 +52,7 @@
 	position: absolute;
 }
 .topbar-list li:last-child {
-	padding-right: 0;
+	padding-left: 0;
 }
 .topbar-list li a {
 	color: #eee;
@@ -68,7 +68,7 @@
 /* Topbar Dropdown */
 .topbar-list .topbar-dropdown {
 	top: 23px;
-	left: -3px;
+	right: -3px;
   	z-index: 1;
 	display: none;
 	padding: 7px 0;
@@ -105,7 +105,7 @@
 }
 .topbar-list .topbar-submenu > a:after {
   top: 8px;
-  right: 9px;
+  left: 9px;
   font-size: 11px;
   content: "\f105";
   position: absolute;
@@ -118,14 +118,14 @@
 }
 .topbar-list .topbar-submenu > .topbar-submenu-in {
 	top: 0;
-	left: 100%;
-	float: left;
+	right: 100%;
+	float: right;
 	z-index: 1000;
 	display: none;
 	padding: 7px 0;
 	font-size: 10px;
 	min-width: 125px;
-	text-align: left;
+	text-align: right;
 	list-style: none;
   background: #151515;
   position: absolute;
@@ -140,15 +140,15 @@
 	text-transform: uppercase;
 	font-size: 10px;
 	letter-spacing: 1px;
-  padding: 7px 12px 7px 0;
-  float: left;
+  padding: 7px 0 7px 12px;
+  float: right;
 }
 
 .topbar-toggler {
 	color: #fff;
 	cursor: pointer;
 	font-size: 16px;
-	float: left;
+	float: right;
 	display: none;
 	padding-top: 1px;
 }
@@ -179,7 +179,7 @@
 	.topbar-list .topbar-dropdown {
 		background: none;
 		top: 0;
-		left: 10px;
+		right: 10px;
 		position: relative;
 		min-width: auto;
 		padding: 7px 0 0;
@@ -188,7 +188,7 @@
 		float: none;
 	  background: none;
 	  top: 0;
-	  left: 10px;
+	  right: 10px;
 	  position: relative;
 	  min-width: auto;
 	  display: block;
@@ -207,9 +207,7 @@
 		display: none;
 	}
 }
-
-/*Bug fixed in v1.9*/
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 	.topbar-menu {
 		display: block !important;
 	}
@@ -220,7 +218,7 @@
 	color: #fff;
 	cursor: pointer;
 	font-size: 14px;
-	padding: 7px 0 0 10px;
+	padding: 7px 10px 0 0;
 }
 .blog-topbar .search-btn:hover {
 	color: #bbb;
@@ -228,7 +226,7 @@
 
 .topbar-search-block {
 	top: 0;
-  left: 0;
+  right: 0;
 	width: 100%;
 	display: none;
   background: #333;
@@ -242,7 +240,7 @@
 }
 .topbar-search-block .search-close {
   top: 10px;
-  right: 0;
+  left: 0;
   color: #fff;
   cursor: pointer;
   position: absolute;
@@ -324,8 +322,8 @@
 
 	.header-v8 > .navbar > .container > .navbar-header,
 	.header-v8 > .navbar > .container > .navbar-collapse {
-	  	margin-left: 0;
 	  	margin-right: 0;
+	  	margin-left: 0;
 	}
 }
 
@@ -361,12 +359,12 @@
 
 @media (min-width: 992px) {
 	.header-v8 .navbar-nav {
-		float: right;
+		float: left;
 	}
 }
 @media (max-width: 768px) {
 	.header-v8 .navbar-brand {
-		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
@@ -488,7 +486,7 @@
 
 	.header-v8 .navbar-nav .open .dropdown-menu > li > a,
 	.header-v8 .navbar-nav .open .dropdown-menu .dropdown-header {
-		padding: 5px 15px 5px 25px;
+		padding: 5px 25px 5px 15px;
 	}
 
 	.header-v8 .navbar-nav .open .dropdown-menu > li > a {
@@ -528,10 +526,10 @@
   	/*Design for max-width: 991px*/
   	.header-v8 .navbar-collapse,
 	.header-v8 .navbar-collapse .container {
-		padding-left: 0 !important;
 		padding-right: 0 !important;
-		margin-left: 0;
+		padding-left: 0 !important;
 		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.header-v8 .navbar-nav > li > a {
@@ -597,11 +595,11 @@
 	}
 
 	.header-v8 .navbar-nav > li:last-child > a {
-		padding-right: 0;
+		padding-left: 0;
 	}
 
 	.header-v8 .navbar-nav > li.home > a {
-		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.header-v8 .navbar-nav > li > a,
@@ -674,7 +672,7 @@
 
 .header-v8 .dropdown-submenu > a:after {
     top: 9px;
-    right: 15px;
+    left: 15px;
     font-size: 11px;
     content: "\f105";
     position: absolute;
@@ -691,13 +689,13 @@
 
 .header-v8 .dropdown-submenu > .dropdown-menu {
 	top: -20px;
-	left: 100%;
-	margin-left: 0px;
+	right: 100%;
+	margin-right: 0px;
 }
 
 /*Submenu comes from LEFT side*/
 .header-v8 .dropdown-submenu > .dropdown-menu.submenu-left {
-	left: -100%;
+	right: -100%;
 }
 
 .header-v8 .dropdown-submenu:hover > .dropdown-menu {
@@ -707,7 +705,7 @@
 @media (max-width: 991px) {
 	.header-v8 .dropdown-submenu > .dropdown-menu {
 		display: block;
-		margin-left: 15px;
+		margin-right: 15px;
 	}
 }
 
@@ -716,15 +714,15 @@
 }
 
 .header-v8 .dropdown-submenu.pull-left > .dropdown-menu {
-	left: -100%;
-	margin-left: 10px;
+	right: -100%;
+	margin-right: 10px;
 }
 
 .header-v8 .dropdown-menu li [class^="fa-"],
 .header-v8 .dropdown-menu li [class*=" fa-"] {
-	left: -3px;
+	right: -3px;
 	width: 1.25em;
-	margin-right: 1px;
+	margin-left: 1px;
 	position: relative;
 	text-align: center;
 	display: inline-block;
@@ -755,7 +753,7 @@
 }
 
 .header-v8 .mega-menu .dropdown-menu {
-  	left: auto;
+  	right: auto;
 }
 
 .header-v8 .mega-menu .dropdown-menu > li {
@@ -763,11 +761,11 @@
 }
 
 .header-v8 .mega-menu .dropdown-submenu .dropdown-menu {
-  	left: 100%;
+  	right: 100%;
 }
 
 .header-v8 .mega-menu .nav.pull-right .dropdown-menu {
-  	right: 0;
+  	left: 0;
 }
 
 .header-v8 .mega-menu .mega-menu-content {
@@ -792,8 +790,8 @@
 }
 
 .header-v8 .mega-menu .mega-menu-fullwidth .dropdown-menu {
-  	left: 0;
   	right: 0;
+  	left: 0;
   	overflow: hidden;
 }
 
@@ -812,7 +810,7 @@
 
 /*Dropdown Link List*/
 .header-v8 .mega-menu .mega-menu-fullwidth .dropdown-link-list {
-	padding-left: 0;
+	padding-right: 0;
 	list-style: none;
 	margin-bottom: 0;
 }
@@ -837,7 +835,7 @@
 /*Responsive Mega Menu Content*/
 @media (min-width: 768px) {
 	.header-v8 .mega-menu .mega-menu-fullwidth .mega-menu-content .row {
-		margin-right: 15px;
+		margin-left: 15px;
 	}
 }
 
@@ -853,7 +851,7 @@
 
     .header-v8 .mega-menu .mega-menu-fullwidth .dropdown-menu li h2 {
 		font-size: 13px;
-		padding-left: 10px;
+		padding-right: 10px;
 	}
 
     .header-v8 .mega-menu .mega-menu-fullwidth .dropdown-menu li a {
@@ -862,15 +860,15 @@
 
 	/*Dropdown Link List*/
 	.header-v8 .mega-menu .mega-menu-fullwidth .dropdown-link-list > li > a {
-		padding-left: 15px;
+		padding-right: 15px;
 	}
 }
 
 @media (min-width: 992px) {
 	.header-v8 .mega-menu .mega-menu-fullwidth .dropdown-menu {
 		padding-top: 25px;
-		margin-left: 15px;
 		margin-right: 15px;
+		margin-left: 15px;
 		padding-bottom: 25px;
 	}
 }
@@ -883,7 +881,7 @@
 /*Header*/
 .header-fixed .header-v8.header-sticky {
 	top: 0;
-	left: 0;
+	right: 0;
 	width: 100%;
 	height: auto;
 	z-index: 999;
@@ -933,7 +931,7 @@
 ----------------------------------------------------*/
 
 .boxed-layout.header-fixed .header-v8.header-sticky {
-	left: inherit;
+	right: inherit;
 	width: inherit;
 }
 

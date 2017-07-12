@@ -3,7 +3,7 @@ function HomeCtrl($scope,$rootScope,RestAPI, $window, constants, $interval) {
   me.videos = [];
   me.posts = [];
   me.isLoading = true;
-  me.loaderTotalCount = 1;
+  me.loaderTotalCount = 3;
   me.loaderCount = 0;
   me.language = $rootScope.language;
 
@@ -21,13 +21,22 @@ function HomeCtrl($scope,$rootScope,RestAPI, $window, constants, $interval) {
     me.posts = [];
   });
   
-  var GET = RestAPI.get(constants.api.url + '/cinemas');
+  var GET = RestAPI.get(constants.api.url + '/upcomingCinemas');
   GET.success(function(response) {
-    me.upcomingCinemas = response.upcomingCinemas ? response.upcomingCinemas : [];
+    me.upcomingCinemas = response.data ? response.data : [];
     me.showOrHideLoader();
   });
   GET.error(function() {
     me.upcomingCinemas = [];
+  });
+  
+  var GET = RestAPI.get(constants.api.url + '/recentCinemas');
+  GET.success(function(response) {
+    me.recentCinemas = response.data ? response.data : [];
+    me.showOrHideLoader();
+  });
+  GET.error(function() {
+    me.recentCinemas = [];
   });
 
   me.showPost = function(post) {

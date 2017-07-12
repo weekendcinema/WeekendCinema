@@ -1,34 +1,34 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	grunt.initConfig({
-		pkg : grunt.file.readJSON('package.json'),
+		pkg: grunt.file.readJSON('package.json'),
 		// Task configuration will be written here
-		clean : {
-			temp : {
-				src : [ 'app/routes/app-all.js' ]
+		clean: {
+			temp: {
+				src: ['app-all.js']
 			}
 		},
-		concat : {
-			options : {
-				separator : '\n'
+		concat: {
+			options: {
+				separator: '\n'
 			},
-			dist : {
-				src : [ 'app/routes/app.js','app/components/**/*.js' ],
-				dest : 'app/routes/app-all.js'
+			dist: {
+				src: ['app/app.js', 'app/components/**/*.js'],
+				dest: 'app-all.js'
 			}
 		},
-		express : {
-			dev : {
-				options : {
-					script : 'server.js'
+		express: {
+			dev: {
+				options: {
+					script: 'server.js'
 				}
 			}
 		},
-		watch : {
-			files : [ 'Gruntfile.js','server.js', 'app/**/*.js' ], //Files to be watched
-			tasks : [ 'clean:temp', 'concat:dist', 'express:dev' ], //(Re)start the server
-			options : { //Server options
-				spawn : false
-			//Must have for reload
+		watch: {
+			files: ['Gruntfile.js', 'server.js', 'app/**/*.js'], //Files to be watched
+			tasks: ['clean:temp', 'concat:dist', 'express:dev'], //(Re)start the server
+			options: { //Server options
+				spawn: false
+				//Must have for reload
 			}
 		}
 	});
@@ -40,6 +40,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-express-server');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('local', [ 'clean:temp', 'concat:dist', 'express:dev',
-			'watch' ]);
+	grunt.registerTask('local', ['clean:temp', 'concat:dist', 'express:dev',
+		'watch']);
 };

@@ -4,7 +4,7 @@ app.directive('spinner', [function() {
       scope: {
         show: '='
       },
-      templateUrl:'app/components/common/directives/spinner/spinner.html',
+      templateUrl:'app/components/common/directives/spinner/Spinner.html',
       link: function(scope, element) {
         $(element).modal('show');
         $("#myModal").modal('show');

@@ -1,1 +1,35 @@
-/* Add here all your css styles (customizations) */
+
+.content-sm {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.tab-v4 .tab-content {
+    padding: 5px 0 5px #3498db;
+}
+.tab-v1 .nav-tabs {
+    border-bottom: solid 2px #72c02c;
+}
+.tab-v1 .nav-tabs > .active > a, .tab-v1 .nav-tabs > .active > a:hover, .tab-v1 .nav-tabs > .active > a:focus {
+    background: #3498db;
+}
+.tab-v1 .nav-tabs > li > a:hover {
+    background: #3498db;
+}
+.tab-v1 .nav-tabs {
+    border-bottom: solid 2px #3498db;
+}
+
+.tab-v1 .tab-content img {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.blog-thumb-v2 .blog-thumb-desc {
+    overflow: hidden;
+    padding-top: 5px;
+}
+.block-grid-v2-info{
+    padding: 5px;
+}
+

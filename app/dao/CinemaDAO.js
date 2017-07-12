@@ -12,42 +12,70 @@ function CinemaDAO(db) {
 
   var cinemaCollection = db.collection("cinema");
 
-  this.getCinema = function(id, callback) {
+  this.getCinema = function (id, callback) {
 
     var query = {
       '_id': id
     };
-    cinemaCollection.findOne(query, function(err, cinemaData) {
-      if (err){
+    cinemaCollection.findOne(query, function (err, cinemaData) {
+      if (err) {
         return callback(err, '{}');
       }
       callback(err, cinemaData);
     });
   };
 
-  this.getCinemas = function(options, callback) {
+  this.upcomingCinemas = function (callback) {
     var query = {
-            "general.releaseDt": {
-              "$gte": new Date()
-            }
-          };
-          var projection = {
-            "cinemaId": true,
-            "name": true,
-            "general.releaseDt": true,
-            "general.posterUrl": true,
-            "lang": true,
-            "_id": false
-          }
-          var sort = {
-                  'general.releaseDt': 1,
-                  'name':1
-          }
-          cinemaCollection.find(query, projection).sort(sort).toArray(function(err, data) {
-            if (err) return callback(null, '{}');
-            callback(err, data);
-          });
-        };
+      "general.releaseDt": {
+        "$gte": new Date()
+      }
+    };
+    var projection = {
+      "cinemaId": true,
+      "name": true,
+      "general.releaseDt": true,
+      "general.posterUrl": true,
+      "lang": true,
+      "_id": false
+    }
+    var sort = {
+      'general.releaseDt': 1
+    }
+    cinemaCollection.find(query, projection).sort(sort).toArray(function (err, data) {
+      if (err) {
+        return callback(null, '{}');
+      } else {
+        callback(err, data);
+      }
+    });
+  };
+  this.recentCinemas = function (callback) {
+    var query = {
+      "general.releaseDt": {
+        "$lte": new Date()
+      }
+    };
+    var projection = {
+      "cinemaId": true,
+      "name": true,
+      "general.releaseDt": true,
+      "general.posterUrl": true,
+      "general.rating": true,
+      "lang": true,
+      "_id": false
+    }
+    var sort = {
+      'general.releaseDt': -1
+    }
+    cinemaCollection.find(query, projection).sort(sort).toArray(function (err, data) {
+      if (err) {
+        return callback(null, '{}');
+      } else {
+        callback(err, data);
+      }
+    });
+  };
 
 }
 

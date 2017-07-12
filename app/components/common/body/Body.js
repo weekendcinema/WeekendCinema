@@ -4,4 +4,4 @@ function BodyDirective() {
     templateUrl: "app/components/common/body/Body.html"
   };
 }
-app.directive('wcbody', [BodyDirective]);
+app.directive('home', [BodyDirective]);

@@ -6,16 +6,16 @@ function TimeDiff($sce) {
     },
     templateUrl: '',
     replace: true,
-    link: function(scope, elm) {
-      scope.$watch('date', function(newVal) {
+    link: function (scope, elm) {
+      scope.$watch('date', function (newVal) {
         if (newVal) {
           var startDate = new Date();
           var endDate = new Date(newVal);
           var timeStart = startDate.getTime();
           var timeEnd = endDate.getTime();
           var diffMs = (timeStart - timeEnd);
-          var diffYears = Math.abs(Math.round((diffMs/(60 * 60 * 24))/365.25));
-          var diffMonths = monthDiff(endDate,startDate)
+          var diffYears = Math.abs(Math.round((diffMs / (60 * 60 * 24)) / 365.25));
+          var diffMonths = monthDiff(endDate, startDate)
           var diffDays = Math.floor(diffMs / 86400000); // days
           var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
           var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes

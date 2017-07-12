@@ -12,10 +12,18 @@ function CinemaController(db) {
     });
   };
 
-  this.getCinemas = function(req, res, next) {
-    var options = {};
-    req.params.comingsoon
-    cinemaDAO.getCinemas(function(err, data) {
+  this.upcomingCinemas = function(req, res, next) {
+    cinemaDAO.upcomingCinemas(function(err, data) {
+      if (err) throw next(err);
+      var response = {
+        "data": data
+      }
+      res.json(response);
+    });
+  };
+  
+  this.recentCinemas = function(req, res, next) {
+    cinemaDAO.recentCinemas(function(err, data) {
       if (err) throw next(err);
       var response = {
         "data": data
