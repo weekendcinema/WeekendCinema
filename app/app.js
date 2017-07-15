@@ -51,5 +51,11 @@ app.run(['$rootScope', '$state', '$stateParams',
 app.constant('constants', {
   api: {
     url: '/v1'
+  },
+  endpoints:{
+    loadCinema                    : '/v1/cinema/',
+    searchCinema                  : '/v1/searchCinema/',
+    upcomingCinema                : '/v1/upcomingCinemas',
+    jukeBox                       : '/v1/jukeBox'
   }
 });

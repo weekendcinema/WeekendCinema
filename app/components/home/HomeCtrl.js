@@ -5,7 +5,6 @@ function HomeCtrl($scope,$rootScope,RestAPI, $window, constants, $interval) {
   me.isLoading = true;
   me.loaderTotalCount = 3;
   me.loaderCount = 0;
-  me.language = $rootScope.language;
 
   var GET = RestAPI.get(constants.api.url + '/posts');
   GET.success(function(response) {

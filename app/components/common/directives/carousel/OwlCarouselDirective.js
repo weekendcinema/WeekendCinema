@@ -5,7 +5,7 @@ app.directive("owlCarousel", function () {
     link: function (scope) {
       scope.initCarousel = function (element) {
         var defaultOptions = {
-          autoplay: true, rewind: true, dots: true, nav: true, responsive: {
+          autoplay: true, autoplayTimeout:2000,rewind: true, dots: true, nav: true, responsive: {
             0: {
               items: 2
             },

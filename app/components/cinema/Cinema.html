@@ -1,87 +1,76 @@
 <div class="container" ng-if="!isLoading">
 	<div class="row">
-		<div class="col-md-2 col-xs-12">
+		<div class="col-md-2 col-xs-6">
 			<div class="card">
 				<img class="card-img-top img-240" src="{{cinema.general.posterUrl}}" alt="Card image cap">
 			</div>
 		</div>
-		<div class="col-md-10 col-xs-12">
-			<div class="row">
-				<div class="col-md-3 col-xs-12">
-					<span class="badge  bg-color-mediumseagreen">{{cinema.name}}</span>
-					<ul>
-						<li ng-if="cinema.lng"><i class="fa fa-language" aria-hidden="true"></i> Language: {{cinema.lng}}</li>
-						<li ng-if="cinema.general.banner.name"><i class="fa fa-bookmark" aria-hidden="true"></i> Banner : {{cinema.general.banner.name}}
-						</li>
-						<li ng-if="cinema.general.genre.length"><i class="fa fa-film" aria-hidden="true"></i> Genre :
-							<and list="cinema.general.genre"></and>
-						</li>
-						<li ng-if="cinema.general.releaseDt"><i class="fa fa-calendar" aria-hidden="true"></i> Release : January 1,2017
-						</li>
-						<li ng-if="cinema.general.duration"><i class="fa fa-clock-o" aria-hidden="true"></i> Duration : {{cinema.general.duration}} minutes
-						</li>
-						<li ng-if="cinema.general.certificate"><i class="fa fa-certificate" aria-hidden="true"></i> Certificate : {{cinema.general.certificate}}
-						</li>
-						<li ng-if="cinema.general.budget"><i class="fa fa-inr" aria-hidden="true"></i> Budget : {{cinema.general.budget}}</li>
-						<li ng-if="cinema.general.collection"><i class="fa fa-inr" aria-hidden="true"></i> Collection : {{cinema.general.collection}}
-						</li>
-						<li ng-if="cinema.general.result">Result : {{cinema.general.result}}
-						</li>
-					</ul>
-				</div>
-				<div class="col-md-9">
-					<span class="badge  bg-color-tomato">Starring</span>
-					<owl-carousel class="owl-carousel carousel owl-theme" data-options="{ nav:false,autoplayTimeout:2000,responsive:{
-				            0:{
-				                items:5
-				            },
-				            500:{
-				            items:4
-				            }
-				        }}">
-						<owl-carousel-item ng-repeat="cast in cinema.casting.cast">
-							<div class="card">
-								<a ui-sref="celebrity({celebrityName:cast.celebrityId})" href="#/celebrity/{{cast.celebrityId}}"> <img
-							class="card-img-top img-120" src="{{cast.img}}"
-							alt="Card image cap"></a>
-								<div class="card-block">
-									<h5 class="card-title">{{cast.name}}</h5>
-									<p class="card-text">
-										<small class="">{{cast.type}}</small>
-									</p>
-								</div>
-							</div>
-						</owl-carousel-item>
-					</owl-carousel>
-				</div>
+		<div class="col-md-4 col-xs-6">
+			<div class="padding-left-10">
+				<h2>{{cinema.name}}</h2>
+				<ul>
+					<li ng-if="cinema.lng">Language : {{cinema.lng}}</li>
+					<li ng-if="cinema.general.banner.name">Banner : {{cinema.general.banner.name}}
+					</li>
+					<li ng-if="cinema.general.genre.length">Genre :
+						<and list="cinema.general.genre"></and>
+					</li>
+					<li ng-if="cinema.general.releaseDt">Release : {{cinema.general.releaseDt | date :'mediumDate'}}
+					</li>
+					<li ng-if="cinema.general.duration">Duration : {{cinema.general.duration}} minutes
+					</li>
+					<li ng-if="cinema.general.certificate">Certificate : {{cinema.general.certificate}}
+					</li>
+					<li ng-if="cinema.general.budget">Budget : {{cinema.general.budget}}</li>
+					<li ng-if="cinema.general.collection">Collection : {{cinema.general.collection}}</li>
+					<li ng-if="cinema.general.result">Result : {{cinema.general.result}}</li>
+				</ul>
 			</div>
-			<div class="row">
+		</div>
+		<div class="col-md-6 col-xs-12">
+			<div class="bs-callout bs-callout-info">
+				<h4>Synopsis</h4>
 				<p>
-					{{cinema.name}} is a {{cinema.general.year}} Indian Telugu-language
+					{{cinema.name}} is a {{cinema.general.releaseDt | date :'yyyy'}} Indian Telugu-language
 					<and list="cinema.general.genre"></and>
 					cinema directed by {{director.name}} and produced by {{producer.name}} under the banner of {{cinema.general.banner.name}}.
 				</p>
+				<h4>Rating : {{cinema.general.rating}}</h4>
+				
+				<ul class="list-inline star-vote">
+					<li ng-repeat="number in [1,2,3,4,5]">
+						<i ng-class="{'fa fa-star': (number-cinema.general.rating)<=0,'fa fa-star-o': (number-cinema.general.rating)>=1,'fa fa-star-half-o': ((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)}"></i>
+					</li>
+				</ul>
+				
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container" ng-show="cinema.songs.list.length>0">
-	<span class="badge bg-color-MUSIC">Songs</span>
+<div class="container" ng-if="cinema.people">
+</div>
+
+</div>
+<div class="container" ng-if="cinema.songs.list.length">
+	<span class="badge bg-color-MUSIC">Songs</span> <a  href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">All Songs</a>
 	<div class="row">
 		<div class="col-md-6">
-			 <div class="list-group" ng-repeat="song in cinema.songs.list">
-				<a href="" ng-click="setCurrentSong(song.youtubeUrl)" class="list-group-item">{{song.name}} | Lyrics : <span ng-repeat="lyricist in song.lyricist">{{lyricist.name}}
-						</span> | Singers: <span ng-repeat="singer in song.singers">{{singer.name}},</span></a>
-			</div>
+			<ol>
+				<li ng-repeat="song in cinema.songs.list">
+					<a href="" ng-click="setCurrentSong(song.youtubeUrl)">
+						<h4 class="color-MUSIC">{{song.name}}</h4>
+					</a>Lyrics : <span ng-repeat="lyricist in song.lyricist">{{lyricist.name}}
+						</span> | Singers: <span ng-repeat="singer in song.singers">{{singer.name}},</span>
+				</li>
+			</ol>
 		</div>
 		<div class="col-md-6">
-		<my-youtube class="youtube-320" code="currentSong" ></my-youtube>
+			<my-youtube class="youtube-320" code="currentSong"></my-youtube>
 		</div>
 	</div>
 </div>
 
-
-<div class="container" ng-if="cinema.videos">
+<div class="container" ng-if="cinema.videos.length">
 	<span class="badge bg-color-TEASER">Trailers/Videos</span>
 	<div class="row">
 		<owl-carousel class="owl-carousel carousel owl-theme" data-options="{autoplay:false,nav:true,dots:false,video:true,responsive:{

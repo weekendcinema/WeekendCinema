@@ -25,6 +25,30 @@ function CinemaDAO(db) {
     });
   };
 
+
+  this.searchCinema = function (text, callback) {
+
+    var query = { $text: { $search: text } }
+
+    var projection = {
+      "cinemaId": true,
+      "name": true,
+      "general.releaseDt": true,
+      "lang": true,
+      "type": "cinema",
+      "_id": false
+    }
+
+    cinemaCollection.find(query, projection).toArray(function (err, data) {
+      if (err) {
+        return callback(null, '{}');
+      } else {
+        callback(err, data);
+      }
+    });
+
+  };
+
   this.upcomingCinemas = function (callback) {
     var query = {
       "general.releaseDt": {
@@ -67,6 +91,32 @@ function CinemaDAO(db) {
     }
     var sort = {
       'general.releaseDt': -1
+    }
+    cinemaCollection.find(query, projection).sort(sort).toArray(function (err, data) {
+      if (err) {
+        return callback(null, '{}');
+      } else {
+        callback(err, data);
+      }
+    });
+  };
+
+  this.jukeBox = function (callback) {
+    var query = {
+      "songs.releaseDt": {
+        "$lte": new Date()
+      }
+    };
+    var projection = {
+      "cinemaId": true,
+      "name": true,
+      "songs.youtubeUrl": true,
+      "songs.releaseDt": true,
+      "lang": true,
+      "_id": false
+    }
+    var sort = {
+      'songs.releaseDt': -1
     }
     cinemaCollection.find(query, projection).sort(sort).toArray(function (err, data) {
       if (err) {

@@ -1,4 +1,3 @@
-
 .content-sm {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -33,3 +32,15 @@
     padding: 5px;
 }
 
+ .easy-block-v1 .easy-block-v1-badge-bottom{
+    left: 0px;
+    bottom: 5px;
+    z-index: 1;
+    color: #fff;
+    padding: 4px 10px;
+    position: absolute;
+}
+
+.header-v8 .navbar-brand img{
+    max-height: 40px;
+}

@@ -51,6 +51,12 @@ app.run(['$rootScope', '$state', '$stateParams',
 app.constant('constants', {
   api: {
     url: '/v1'
+  },
+  endpoints:{
+    loadCinema                    : '/v1/cinema/',
+    searchCinema                  : '/v1/searchCinema/',
+    upcomingCinema                : '/v1/upcomingCinemas',
+    jukeBox                       : '/v1/jukeBox'
   }
 });
 function CalendarHomeCtrl($scope, $http, $compile, uiCalendarConfig, DateUtil) {
@@ -150,39 +156,57 @@ function CelebrityHomeCtrl($scope, $http) {
 app.controller('CelebrityHomeCtrl', [ '$scope', '$http',CelebrityHomeCtrl ]);
 
 
-function CinemaCtrl($scope, $http, $stateParams, constants) {
-	$scope.cinemaName = $stateParams.cinemaName;
-	$scope.isLoading = true;
-	$scope.found = true;
-	$scope.setCurrentSong = function (val) {
-		$scope.currentSong = val
+function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
+	me  = $scope;
+	me.cinemaName = $stateParams.cinemaName;
+	me.isLoading = true;
+	me.found = true;
+	me.setCurrentSong = function (val) {
+		me.currentSong = val
 	};
-	var GET = $http.get(constants.api.url + '/cinema/' + $stateParams.cinemaName);
-	GET.success(function (response) {
-		$scope.cinema = response || null;
-		$scope.currentSong = $scope.cinema.songs && $scope.cinema.songs.list.length ? $scope.cinema.songs.list[0].youtubeUrl : undefined;
-		/*		$scope.director = $scope.cinema.casting.crew.find(function(cel){
-					 return cel.type === 'Director'
-				});
-				$scope.producer = $scope.cinema.casting.crew.find(function(cel){
-					return cel.type === 'Producer'
-			 });*/
-		$scope.isLoading = false;
-	});
-	GET.error(function () {
-		$scope.cinema = null;
-		$scope.isLoading = false;
+	RestAPI.get(constants.endpoints.loadCinema + $stateParams.cinemaName).success(function (response) {
+		me.cinema = response || null;
+		if (me.cinema.songs) {
+			if (me.cinema.songs.youtubeUrl) {
+				me.currentSong = me.cinema.songs.youtubeUrl;
+			} else if (me.cinema.songs.list.length) {
+				me.currentSong = me.cinema.songs.list[0].youtubeUrl;
+			}
+		}
+		me.director = me.cinema.people.crew.find(function (cel) {
+			return cel.type === 'Director'
+		});
+		me.producer = me.cinema.people.crew.find(function (cel) {
+			return cel.type === 'Producer'
+		});
+		me.isLoading = false;
+	}).error(function () {
+		me.cinema = null;
+		me.isLoading = false;
 	});
 
 }
-app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'constants', CinemaCtrl]);
+app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'RestAPI', 'constants', CinemaCtrl]);
 
 
-function CinemaHomeCtrl($scope, $http,$state) {
-
+function CinemaHomeCtrl($scope, $http,$state,RestAPI,constants) {
+    var me = $scope;
+    me.searchList = [];
+    RestAPI.get(constants.endpoints.upcomingCinema).success(function(response) {
+        me.upcomingCinemas = response.data ? response.data : [];
+    }).error(function() {
+        me.upcomingCinemas = [];
+    });
+    me.searchCinema = function(){
+        RestAPI.get(constants.endpoints.searchCinema+me.searchKey).success(function(response){
+           me.searchList = response;
+        }).error(function(){
+           me.searchList.push(me.searchKey);
+        });
+    }
 }
 
-app.controller('CinemaHomeCtrl', [ '$scope', '$http','$state',CinemaHomeCtrl ]);
+app.controller('CinemaHomeCtrl', [ '$scope','$http','$state','RestAPI','constants',CinemaHomeCtrl ]);
 
 
 function BodyDirective() {
@@ -224,7 +248,7 @@ app.directive("owlCarousel", function () {
     link: function (scope) {
       scope.initCarousel = function (element) {
         var defaultOptions = {
-          autoplay: true, rewind: true, dots: true, nav: true, responsive: {
+          autoplay: true, autoplayTimeout:2000,rewind: true, dots: true, nav: true, responsive: {
             0: {
               items: 2
             },
@@ -399,14 +423,15 @@ function YoutubeDirective($sce) {
     restrict: 'E',
     replace: true,
     scope: {
-      code: '='
+      code: '=',
+      options: '='
     },
     replace: true,
     templateUrl: 'app/components/common/directives/youtube/Youtube.html',
     link: function (scope) {
       scope.$watch('code', function (newVal) {
         if (newVal) {
-          scope.url = $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + newVal);
+            scope.url = $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + newVal);
         }
       });
     }
@@ -464,7 +489,6 @@ function HomeCtrl($scope,$rootScope,RestAPI, $window, constants, $interval) {
   me.isLoading = true;
   me.loaderTotalCount = 3;
   me.loaderCount = 0;
-  me.language = $rootScope.language;
 
   var GET = RestAPI.get(constants.api.url + '/posts');
   GET.success(function(response) {
@@ -520,36 +544,19 @@ function HomeCtrl($scope,$rootScope,RestAPI, $window, constants, $interval) {
 app.controller('HomeCtrl', ['$scope','$rootScope','RestAPI', '$window', 'constants',
     HomeCtrl]);
 
-function JukeBoxCtrl($scope, $http, $stateParams, constants,$window) {
-	$scope.found = true;
-	$scope.isLoading = true;
-	if($scope.$parent.posts && $scope.$parent.posts.length>0){
-		$scope.$parent.posts.forEach(function (item, index) {
-			if(item._id === $stateParams.postName){
-				$scope.article = item;
-				$scope.isLoading = false;
-			}
-		});
-	}else{
-		var GET = $http({
-			method : 'GET',
-			url : constants.api.url + '/post/' + $stateParams.postName
-		});	
-		GET.success(function(response) {
-			$scope.article = response ? response : null;
-			$scope.found = true;
-			$scope.isLoading = false;
-		});
-		GET.error(function() {
-			$scope.article = null;
-			$scope.found = false;
-			$scope.isLoading = false;
-		});
-	}
+function JukeBoxCtrl($scope, $http, $stateParams, constants,RestAPI, $window ) {
+	var me = $scope;
+
+	RestAPI.get(constants.endpoints.jukeBox).success(function (response) {
+		me.jukeBox  = response;
+	}).error(function () {
+		me.jukeBox = null;
+	});
+
 	$window.scrollTo(0, 0);
 }
 
-app.controller('JukeBoxCtrl',['$scope','$http', '$stateParams', 'constants','$window',JukeBoxCtrl]);
+app.controller('JukeBoxCtrl', ['$scope', '$http', '$stateParams', 'constants', 'RestAPI', '$window', JukeBoxCtrl]);
 function PostCtrl($scope, $http, $stateParams, constants,$window) {
 	$scope.found = true;
 	$scope.isLoading = true;
