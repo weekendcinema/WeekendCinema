@@ -399,8 +399,8 @@ blockquote {
 
 /* Common styles for all types */
 .bs-callout {
-  padding: 20px 0px 20px 10px;
-  margin: 20px 0;
+  padding: 10px 0px 10px 10px;
+  margin: 0 0;
   border: 0px solid #eee;
   border-left-width: 5px;
   border-radius: 3px;

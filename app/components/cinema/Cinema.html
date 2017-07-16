@@ -17,7 +17,7 @@
 					</li>
 					<li ng-if="cinema.general.releaseDt">Release : {{cinema.general.releaseDt | date :'mediumDate'}}
 					</li>
-					<li ng-if="cinema.general.duration">Duration : {{cinema.general.duration}} minutes
+					<li ng-if="cinema.general.duration">Duration : {{cinema.general.duration}}
 					</li>
 					<li ng-if="cinema.general.certificate">Certificate : {{cinema.general.certificate}}
 					</li>
@@ -35,24 +35,29 @@
 					<and list="cinema.general.genre"></and>
 					cinema directed by {{director.name}} and produced by {{producer.name}} under the banner of {{cinema.general.banner.name}}.
 				</p>
+				<div>
+					<span class="badge  bg-color-tomato">Stars : </span>
+					<span ng-repeat="cast in cinema.people.cast"><a ui-sref="celebrity({celebrityName:cast.celebrityId})" href="#/celebrity/{{cast.celebrityId}}" data-toggle="tooltip" title="{{cast.type}}" data-placement="top">{{cast.name}} </a></span>
+				</div>
+			    <div>
+					<span class="badge  bg-color-tomato">Crew : </span>
+					<span ng-repeat="crew in cinema.people.crew"><a ui-sref="celebrity({celebrityName:crew.celebrityId})" href="#/celebrity/{{crew.celebrityId}}" data-toggle="tooltip" title="{{crew.type}}" data-placement="top">{{crew.name}} </a></span>
+				</div>
 				<h4>Rating : {{cinema.general.rating}}</h4>
-				
 				<ul class="list-inline star-vote">
 					<li ng-repeat="number in [1,2,3,4,5]">
 						<i ng-class="{'fa fa-star': (number-cinema.general.rating)<=0,'fa fa-star-o': (number-cinema.general.rating)>=1,'fa fa-star-half-o': ((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)}"></i>
 					</li>
 				</ul>
-				
+
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container" ng-if="cinema.people">
-</div>
 
 </div>
 <div class="container" ng-if="cinema.songs.list.length">
-	<span class="badge bg-color-MUSIC">Songs</span> <a  href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">All Songs</a>
+	<span class="badge bg-color-MUSIC">Songs</span> <a href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">All Songs</a>
 	<div class="row">
 		<div class="col-md-6">
 			<ol>

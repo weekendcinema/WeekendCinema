@@ -15,11 +15,13 @@
                 <owl-carousel-item ng-repeat="cinema in recentCinemas">
                     <div class="card padding-v-5">
                         <div class="easy-block-v1">
-                            <img class="img-responsive img-max-height-150" src="{{cinema.general.posterUrl}}" alt="">
+                            <img class="img-responsive img-max-height-150" src="{{cinema.general.posterUrl}}" alt="" ui-sref="cinema({cinemaName:cinema.cinemaId})"
+                                href="#/cinema/{{cinema.cinemaId}}">
                             <div class="easy-block-v1-badge rgba-red" ng-show="{{cinema.general.rating}}">{{cinema.general.rating}}</div>
                         </div>
                         <div class="block-grid-v2-info rounded-bottom">
-                            <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></h4>
+                            <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}" data-toggle="tooltip"
+                                    title="{{cinema.name}}">{{cinema.name}}</a></h4>
                             <ul class="list-inline star-vote">
                                 <li ng-repeat="number in [1,2,3,4,5]">
                                     <i ng-class="{'fa fa-star': (number-cinema.general.rating)<=0,'fa fa-star-o': (number-cinema.general.rating)>=1,'fa fa-star-half-o': ((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)}"></i>
@@ -32,11 +34,23 @@
         </div>
         <div class="col-md-6">
             <div class="carousel slide carousel-v1" id="myCarousel-1">
-                <div class="carousel-inner" ng-repeat="post in videos">
-                    <div ng-class="{active: $index == 4}" class="item">
-                        <img class="img-max-height-250" src="https://i.ytimg.com/vi/{{post.media.video.youtube[0]}}/maxresdefault.jpg">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img class="img-max-height-250" src="assets/img/slider/img4.jpg">
                         <div class="carousel-caption">
-                            <p>{{post.msg.local.ttl}}</p>
+                            <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="img-max-height-250" src="assets/img/slider/img3.jpg">
+                        <div class="carousel-caption">
+                            <p>Cras justo odio, dapibus ac facilisis into egestas.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="img-max-height-250" src="assets/img/slider/img2.jpg">
+                        <div class="carousel-caption">
+                            <p>Justo cras odio apibus ac afilisis lingestas de.</p>
                         </div>
                     </div>
                 </div>
@@ -126,7 +140,8 @@
         <div class="col-md-3">
             <!-- Social Shares -->
             <div class="margin-bottom-10">
-                <h2 class="title-v4">Social</h2>
+                <span class="badge  bg-color-tomato">Top 10 Songs</span>
+                
                 <ul class="blog-social-shares">
                     <li>
                         <i class="rounded-x fb fa fa-facebook"></i>
@@ -166,11 +181,13 @@
         <owl-carousel-item ng-repeat="cinema in upcomingCinemas">
             <div class="card padding-v-5">
                 <div class="easy-block-v1">
-                    <img class="img-responsive img-max-height-250" src="{{cinema.general.posterUrl}}" alt="">
+                    <img class="img-responsive img-max-height-250" src="{{cinema.general.posterUrl}}" alt="" ui-sref="cinema({cinemaName:cinema.cinemaId})"
+                        href="#/cinema/{{cinema.cinemaId}}">
                     <div class="easy-block-v1-badge rgba-red">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
                 </div>
                 <div class="block-grid-v2-info rounded-bottom">
-                    <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></h4>
+                    <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}" data-toggle="tooltip"
+                            title="{{cinema.name}}">{{cinema.name}}</a></h4>
                 </div>
             </div>
         </owl-carousel-item>

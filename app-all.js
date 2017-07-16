@@ -164,7 +164,7 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 	me.setCurrentSong = function (val) {
 		me.currentSong = val
 	};
-	RestAPI.get(constants.endpoints.loadCinema + $stateParams.cinemaName).success(function (response) {
+	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
 		if (me.cinema.songs) {
 			if (me.cinema.songs.youtubeUrl) {
@@ -174,10 +174,10 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 			}
 		}
 		me.director = me.cinema.people.crew.find(function (cel) {
-			return cel.type === 'Director'
+			return cel.type === 'Director';
 		});
 		me.producer = me.cinema.people.crew.find(function (cel) {
-			return cel.type === 'Producer'
+			return cel.type === 'Producer';
 		});
 		me.isLoading = false;
 	}).error(function () {
