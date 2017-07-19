@@ -50,10 +50,17 @@ function CinemaDAO(db) {
   };
 
   this.upcomingCinemas = function (callback) {
+
     var query = {
-      "general.releaseDt": {
-        "$gte": new Date()
-      }
+      "$or": [{
+        "general.releaseDt": {
+          "$gte": new Date()
+        }
+      }, {
+        "general.releaseDt": {
+          "$eq": ""
+        }
+      }]
     };
     var projection = {
       "cinemaId": true,

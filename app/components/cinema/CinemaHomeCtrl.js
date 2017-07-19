@@ -13,6 +13,9 @@ function CinemaHomeCtrl($scope, $http,$state,RestAPI,constants) {
            me.searchList.push(me.searchKey);
         });
     }
+    me.filterNull = function(value, index, array){
+        return true;
+    }
 }
 
 app.controller('CinemaHomeCtrl', [ '$scope','$http','$state','RestAPI','constants',CinemaHomeCtrl ]);
