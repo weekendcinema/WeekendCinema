@@ -31,6 +31,12 @@
 }
 .block-grid-v2-info{
     padding: 5px;
+    background-color: white
+}
+
+.blog-thumb-v2{
+     margin: 5px 0px 5px 0px;
+    background-color: white;
 }
 
  .easy-block-v1 .easy-block-v1-badge-bottom{
@@ -44,4 +50,13 @@
 
 .header-v8 .navbar-brand img{
     max-height: 40px;
+}
+
+.padding-v-5{
+	padding: 5px;
+    
+}
+
+.tab-v1 .tab-content {
+    padding: 0;
 }

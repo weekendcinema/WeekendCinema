@@ -330,7 +330,9 @@ blockquote {
 .bg-color-tomato {
 	background-color: #f44336;
 }
-
+.bg-color-gray{
+	background-color: #eee;
+}
 .color-darkorchid {
 	color: #8d38c9;
 }
@@ -374,6 +376,7 @@ blockquote {
 .color-white {
 	color: #ffffff
 }
+
 
 .row {
 	margin-left: 0px;

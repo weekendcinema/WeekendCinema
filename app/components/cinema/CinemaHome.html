@@ -22,7 +22,7 @@
                                         }
                                 }
                                 }">
-        <owl-carousel-item ng-repeat="cinema in upcomingCinemas">
+        <owl-carousel-item ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' ">
             <div class="card padding-v-5">
                 <div class="easy-block-v1">
                     <img class="img-responsive img-fixed-height-150" src="{{cinema.general.posterUrl}}" alt="">
@@ -36,6 +36,6 @@
     </owl-carousel>
 
     <div class="row margin-top-20">
-        <div class="col-md-2" ng-repeat="cinema in upcomingCinemas"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></div>
+        <div class="col-md-2" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' : true"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></div>
     </div>
 </div>

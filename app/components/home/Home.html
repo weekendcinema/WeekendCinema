@@ -1,10 +1,34 @@
 <div ng-if="!isLoading">
     <div class="container">
         <div class="row">
-            <!-- Main Content -->
+            <div class="col-md-6">
+                <!-- Indicators -->
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item" ng-class="{active: $index ==0 }" ng-repeat="post in news">
+                            <a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}"><img class="img-fixed-height-250 img-responsive" src="{{post.media.img[0]}}"></a>
+                            <div class="carousel-caption">
+                                <span>{{post.local.ttl}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                    <a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                </div>
+
+            </div>
             <div class="col-md-6">
                 <span class="badge  bg-color-INCINEMAS">Now Showing</span>
-                <owl-carousel class="owl-carousel carousel owl-theme" data-options="{ items:10,dots: false, nav: false,responsive:{
+                <owl-carousel class="owl-carousel carousel owl-theme bg-color-gray" data-options="{ items:10,dots: false, nav: false,responsive:{
                             0:{
                                 items:3
                             },
@@ -33,31 +57,6 @@
                     </owl-carousel-item>
                 </owl-carousel>
             </div>
-            <div class="col-md-6">
-                <!-- Indicators -->
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item" ng-class="{active: $index ==0 }" ng-repeat="post in news">
-                            <a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}"><img class="img-fixed-height-250 img-responsive" src="{{post.media.img[0]}}"></a>
-                            <div class="carousel-caption">
-                                <span>{{post.local.ttl}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                    <a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-                </div>
-
-            </div>
         </div>
     </div>
     <!--=== Container Part ===-->
@@ -85,13 +84,13 @@
                         </ul>
                     </div>
                     <!-- Tab Content -->
-                    <div class="tab-content">
+                    <div class="tab-content bg-color-gray">
                         <div class="tab-pane fade in active" id="tab-v4-a1">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <!-- Blog Thumb -->
                                     <div class="blog-thumb-v2" ng-repeat="post in videos.slice(0,5)">
-                                        <div class="blog-thumb-grad margin-bottom-5">
+                                        <div class="blog-thumb-grad">
                                             <img src="https://i.ytimg.com/vi/{{post.media.video.youtube[0]}}/mqdefault.jpg" alt="">
                                         </div>
                                         <div class="blog-thumb-desc">
@@ -106,7 +105,7 @@
                                 <div class="col-sm-6">
                                     <!-- Blog Thumb -->
                                     <div class="blog-thumb-v2" ng-repeat="post in videos.slice(5,10)">
-                                        <div class="blog-thumb-grad margin-bottom-5">
+                                        <div class="blog-thumb-grad">
                                             <img src="https://i.ytimg.com/vi/{{post.media.video.youtube[0]}}/mqdefault.jpg" alt="">
                                         </div>
                                         <div class="blog-thumb-desc">
@@ -163,7 +162,8 @@
 
     <div class="container">
         <span class="badge  bg-color-darkorange">Coming Soon</span>
-        <owl-carousel class="owl-carousel carousel owl-theme" data-options="{ items:10,responsive:{
+        <div class="row">
+        <owl-carousel class="owl-carousel carousel owl-theme bg-color-gray" data-options="{ items:10,responsive:{
                                         0:{
                                             items:3
                                         },
@@ -172,7 +172,7 @@
                                         }
                                 }
                                 }">
-            <owl-carousel-item ng-repeat="cinema in upcomingCinemas | filter : {'general.releaseDt': '!' }">
+            <owl-carousel-item ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'">
                 <div class="card padding-v-5">
                     <div class="easy-block-v1">
                         <img class="img-responsive img-fixed-height-150" src="{{cinema.general.posterUrl}}" alt="" ui-sref="cinema({cinemaName:cinema.cinemaId})"
@@ -186,5 +186,6 @@
                 </div>
             </owl-carousel-item>
         </owl-carousel>
+           </div>
     </div>
 </div>
