@@ -13,29 +13,32 @@
         </div>
     </div>
     <span class="badge  bg-color-darkorange">Coming Soon</span>
-    <owl-carousel class="owl-carousel carousel owl-theme" data-options="{ items:10,responsive:{
-                                        0:{
-                                            items:3
-                                        },
-                                        500:{
-                                            items:10
-                                        }
-                                }
-                                }">
-        <owl-carousel-item ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' ">
+
+
+    <div class="row margin-top-20">
+        <div class="col-md-2 col-xs-6" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'">
             <div class="card padding-v-5">
                 <div class="easy-block-v1">
-                    <img class="img-responsive img-fixed-height-150" src="{{cinema.general.posterUrl}}" alt="">
+                    <img class="img-responsive img-fixed-height-250" src="{{cinema.general.posterUrl}}" alt="">
                     <div class="easy-block-v1-badge rgba-red" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
                 </div>
                 <div class="block-grid-v2-info rounded-bottom">
                     <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></h4>
                 </div>
             </div>
-        </owl-carousel-item>
-    </owl-carousel>
-
+        </div>
+    </div>
     <div class="row margin-top-20">
-        <div class="col-md-2" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' : true"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></div>
+        <div class="col-md-2 col-xs-6" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' : true">
+            <div class="card padding-v-5">
+                <div class="easy-block-v1">
+                    <img class="img-responsive img-fixed-height-250" src="{{cinema.general.posterUrl}}" alt="">
+                    <div class="easy-block-v1-badge rgba-red" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
+                </div>
+                <div class="block-grid-v2-info rounded-bottom">
+                    <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></h4>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
