@@ -31,12 +31,15 @@
 }
 .block-grid-v2-info{
     padding: 5px;
-    background-color: white
+    background-color: white;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+    border-bottom:none;
 }
 
 .blog-thumb-v2{
-     margin: 5px 0px 5px 0px;
+    margin: 5px 0px 5px 0px;
     background-color: white;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
 }
 
  .easy-block-v1 .easy-block-v1-badge-bottom{

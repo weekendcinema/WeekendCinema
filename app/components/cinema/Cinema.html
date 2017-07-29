@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-2 col-xs-6">
 			<div class="card">
-				<img class="card-img-top img-240" src="{{cinema.general.posterUrl}}" alt="Card image cap">
+				<img class="card-img-top img-fixed-height-250" src="{{cinema.general.posterUrl}}" alt="Card image cap">
 			</div>
 		</div>
 		<div class="col-md-4 col-xs-6">
@@ -27,7 +27,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="col-md-6 col-xs-12">
+		<div class="col-md-6 col-xs-12 margin-top-10">
 			<div class="bs-callout bs-callout-info">
 				<h4>Synopsis</h4>
 				<p>
@@ -56,7 +56,7 @@
 </div>
 
 </div>
-<div class="container" ng-if="cinema.songs.list.length">
+<div class="container" ng-if="cinema.songs.list.length || cinema.songs.releaseDt">
 	<span class="badge bg-color-MUSIC">Songs</span> <a href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">All Songs</a>
 	<div class="row">
 		<div class="col-md-6">

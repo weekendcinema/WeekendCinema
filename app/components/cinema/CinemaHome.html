@@ -1,6 +1,6 @@
 
 <div class="container">
-    <div class="row">
+    <!--<div class="row">
         <div class="col-md-2">
         </div>
         <div class="col-md-8">
@@ -11,13 +11,11 @@
                 </datalist>
             </form>
         </div>
-    </div>
+    </div> -->
     <span class="badge  bg-color-darkorange">Coming Soon</span>
-
-
-    <div class="row margin-top-20">
+    <div class="row">
         <div class="col-md-2 col-xs-6" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'">
-            <div class="card padding-v-5">
+            <div class="card">
                 <div class="easy-block-v1">
                     <img class="img-responsive img-fixed-height-250" src="{{cinema.general.posterUrl}}" alt="">
                     <div class="easy-block-v1-badge rgba-red" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
@@ -27,10 +25,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row margin-top-20">
-        <div class="col-md-2 col-xs-6" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' : true">
-            <div class="card padding-v-5">
+         <div class="col-md-2 col-xs-6" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' : true">
+            <div class="card">
                 <div class="easy-block-v1">
                     <img class="img-responsive img-fixed-height-250" src="{{cinema.general.posterUrl}}" alt="">
                     <div class="easy-block-v1-badge rgba-red" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
